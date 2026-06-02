@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Route: GENETIC — Wrocław</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { margin: 0; }
+    #map { height: 100vh; }
+    #info { position: absolute; top: 10px; right: 10px; z-index: 1000;
+            background: white; padding: 10px 14px; border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3); font-family: sans-serif; }
+    #info h3 { margin: 0 0 6px; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info">
+  <h3>GENETIC</h3>
+  <p>Start: <b>SZYMANÓW PÓŁNOCNA</b></p>
+  <p>Stops: <b>23</b></p>
+  <p>Total distance: <b>35530.0 m</b></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map').setView([51.19630913678439, 17.030218802194465], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var greenIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+  var blueIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+
+  var routeLine = L.geoJSON({
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [[17.030861,51.19628],[17.032257,51.196391],[17.030889,51.187449],[17.023517,51.178648],[17.022503,51.174177],[17.023906,51.169844],[17.027842,51.16503],[17.028308,51.153434],[17.0321,51.14046],[17.028416,51.134946],[17.027874,51.126112],[17.034096,51.114177],[17.036098,51.114552],[17.039479,51.113106],[17.038075,51.112462],[17.032976,51.11333],[17.035856,51.114587],[17.040529,51.112724],[17.040691,51.11067],[17.039031,51.110712],[17.038369,51.106838],[17.037231,51.103994],[17.031715,51.103438],[17.035388,51.102039],[17.036588,51.101951],[17.035401,51.100916],[17.038915,51.108377],[17.040275,51.10866],[17.041518,51.108586],[17.040483,51.108245],[17.039375,51.108327],[17.040678,51.109056],[17.043251,51.108664],[17.040973,51.103744],[17.038455,51.102579],[17.039986,51.102652],[17.038844,51.100808],[17.038842,51.100803],[17.038439,51.099792],[17.035237,51.100112],[17.031385,51.100852],[17.031004,51.100156],[17.029872,51.098528],[17.020214,51.101071],[17.013827,51.100645],[17.012551,51.103614],[17.011226,51.103319],[17.0106,51.104454],[17.007746,51.104546],[17.006901,51.105004],[17.008027,51.104141],[17.01679,51.106053],[17.017566,51.106339],[17.019218,51.106649],[17.026447,51.102029],[17.029278,51.101224],[17.031056,51.104754],[17.032817,51.105224],[17.033706,51.108059],[17.034824,51.107808],[17.033732,51.107258],[17.029384,51.108091],[17.029038,51.109946],[17.029644,51.111263],[17.028453,51.11149],[17.027828,51.110113],[17.026802,51.110321],[17.027076,51.111555],[17.023917,51.111305],[17.024261,51.112045],[17.025579,51.112865],[17.027597,51.112484],[17.026913,51.11162],[17.022175,51.111756],[17.024602,51.116819],[17.028121,51.118016],[17.028446,51.120118],[17.026321,51.122444],[17.028302,51.125466],[17.028172,51.132962],[17.032513,51.140382],[17.02859,51.153456],[17.028247,51.165759],[17.024029,51.169639],[17.022503,51.17433],[17.023517,51.178648],[17.030889,51.187449],[17.032257,51.196391],[17.030861,51.19628]]
+    }
+  }, { style: { color: '#e63946', weight: 4, opacity: 0.8 } }).addTo(map);
+  map.fitBounds(routeLine.getBounds());
+
+  L.marker([51.19630913678439, 17.030218802194465], {icon: greenIcon}).addTo(map).bindPopup('<b>START / META</b><br>SZYMANÓW PÓŁNOCNA');
+L.marker([51.11328726962954, 17.032964871601017], {icon: blueIcon}).addTo(map).bindPopup('<b>1. WRO26H</b><br>+10746.3 m');
+L.marker([51.112470732764194, 17.040418386588417], {icon: blueIcon}).addTo(map).bindPopup('<b>2. WRO01HO</b><br>+701.2 m');
+L.marker([51.106869049991595, 17.038131782616823], {icon: blueIcon}).addTo(map).bindPopup('<b>3. WRO105M</b><br>+812.7 m');
+L.marker([51.10344271773059, 17.03167008976014], {icon: blueIcon}).addTo(map).bindPopup('<b>4. WRO05HO</b><br>+859 m');
+L.marker([51.102067673260834, 17.035209784370277], {icon: blueIcon}).addTo(map).bindPopup('<b>5. POP-WRO103</b><br>+447.2 m');
+L.marker([51.100941100491184, 17.035239303907606], {icon: blueIcon}).addTo(map).bindPopup('<b>6. POP-WRO272</b><br>+294.9 m');
+L.marker([51.10864442280285, 17.04019429643629], {icon: blueIcon}).addTo(map).bindPopup('<b>7. WRO122M</b><br>+1051.8 m');
+L.marker([51.10835076717566, 17.040429406315045], {icon: blueIcon}).addTo(map).bindPopup('<b>8. WRO06HO</b><br>+204.2 m');
+L.marker([51.10260118332193, 17.038318790720854], {icon: blueIcon}).addTo(map).bindPopup('<b>9. WRO169M</b><br>+1314.1 m');
+L.marker([51.1007762529065, 17.039001018212947], {icon: blueIcon}).addTo(map).bindPopup('<b>10. WRO10HP</b><br>+506.3 m');
+L.marker([51.10077077708601, 17.03899967665633], {icon: blueIcon}).addTo(map).bindPopup('<b>11. WRO238M</b><br>+0 m');
+L.marker([51.09963201652476, 17.038516727454496], {icon: blueIcon}).addTo(map).bindPopup('<b>12. WRO69M</b><br>+124.6 m');
+L.marker([51.100188226434554, 17.03527793725251], {icon: blueIcon}).addTo(map).bindPopup('<b>13. POP-WRO219</b><br>+269.6 m');
+L.marker([51.10013213086964, 17.03111656803804], {icon: blueIcon}).addTo(map).bindPopup('<b>14. WRO153M</b><br>+364.4 m');
+L.marker([51.10448444905791, 17.010737477019475], {icon: blueIcon}).addTo(map).bindPopup('<b>15. WRO37BAPP</b><br>+1959.1 m');
+L.marker([51.10451795401458, 17.00775940331345], {icon: blueIcon}).addTo(map).bindPopup('<b>16. WRO25HP</b><br>+262.5 m');
+L.marker([51.10619592659191, 17.016661216613038], {icon: blueIcon}).addTo(map).bindPopup('<b>17. POP-WRO147</b><br>+705 m');
+L.marker([51.10621430260036, 17.017682175375235], {icon: blueIcon}).addTo(map).bindPopup('<b>18. WRO210M</b><br>+63 m');
+L.marker([51.10676681933939, 17.019106457376477], {icon: blueIcon}).addTo(map).bindPopup('<b>19. POP-WRO223</b><br>+225.6 m');
+L.marker([51.10185617604387, 17.0263210019023], {icon: blueIcon}).addTo(map).bindPopup('<b>20. WRO24H</b><br>+792.9 m');
+L.marker([51.105295875369485, 17.032513924223483], {icon: blueIcon}).addTo(map).bindPopup('<b>21. WRO88M</b><br>+780.3 m');
+L.marker([51.110018547560905, 17.028628572061397], {icon: blueIcon}).addTo(map).bindPopup('<b>22. POP-WRO261</b><br>+1134.7 m');
+L.marker([51.1120807691697, 17.024202530546308], {icon: blueIcon}).addTo(map).bindPopup('<b>23. WRO02H</b><br>+937.9 m');
+
+</script>
+</body>
+</html>

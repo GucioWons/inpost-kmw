@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Route: GENETIC — Żarów</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { margin: 0; }
+    #map { height: 100vh; }
+    #info { position: absolute; top: 10px; right: 10px; z-index: 1000;
+            background: white; padding: 10px 14px; border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3); font-family: sans-serif; }
+    #info h3 { margin: 0 0 6px; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info">
+  <h3>GENETIC</h3>
+  <p>Start: <b>ŻARÓW</b></p>
+  <p>Stops: <b>8</b></p>
+  <p>Total distance: <b>105438.7 m</b></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map').setView([51.101336286029, 16.93722926812316], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var greenIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+  var blueIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+
+  var routeLine = L.geoJSON({
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [[16.937094,51.101367],[16.939481,51.098415],[16.950896,51.106986],[16.937652,51.109567],[16.936029,51.104883],[16.932391,51.105212],[16.9339,51.10258],[16.927031,51.075117],[16.933399,51.047735],[16.929531,51.043993],[16.914846,51.040373],[16.86151,51.03512],[16.808162,51.034857],[16.798677,51.032733],[16.784464,51.025302],[16.774383,51.022659],[16.740372,51.019778],[16.69792,51.019388],[16.624258,51.034812],[16.596141,51.043643],[16.592909,51.042791],[16.583444,51.037335],[16.576928,51.025297],[16.552037,51.012552],[16.545998,51.007401],[16.530651,51.005553],[16.501841,50.996649],[16.488341,50.994552],[16.490236,50.983645],[16.498116,50.973295],[16.496538,50.967318],[16.498686,50.959271],[16.493475,50.952117],[16.492514,50.943728],[16.494946,50.937924],[16.492156,50.936975],[16.495435,50.933784],[16.494049,50.936842],[16.502628,50.937838],[16.502552,50.940678],[16.495702,50.940927],[16.492997,50.940903],[16.493699,50.941138],[16.494734,50.942284],[16.492539,50.944055],[16.49401,50.951815],[16.498677,50.95866],[16.496538,50.967318],[16.498077,50.973641],[16.490236,50.983645],[16.488813,50.994207],[16.530651,51.005553],[16.545998,51.007401],[16.552037,51.012552],[16.576928,51.025297],[16.583299,51.037173],[16.592392,51.04259],[16.660486,51.027936],[16.687965,51.020324],[16.697942,51.01928],[16.740378,51.01967],[16.772983,51.022387],[16.782586,51.024452],[16.797314,51.032078],[16.807573,51.034677],[16.863504,51.03512],[16.935077,51.043452],[16.937585,51.045552],[16.933492,51.049353],[16.927324,51.077075],[16.934121,51.102487],[16.937722,51.108982],[16.940653,51.109122],[16.937913,51.108811],[16.937094,51.101367]]
+    }
+  }, { style: { color: '#e63946', weight: 4, opacity: 0.8 } }).addTo(map);
+  map.fitBounds(routeLine.getBounds());
+
+  L.marker([51.101336286029, 16.93722926812316], {icon: greenIcon}).addTo(map).bindPopup('<b>START / META</b><br>ŻARÓW');
+L.marker([50.937016449499666, 16.49189072578429], {icon: blueIcon}).addTo(map).bindPopup('<b>1. ZRO03M</b><br>+52193.5 m');
+L.marker([50.9337378459161, 16.49542989187119], {icon: blueIcon}).addTo(map).bindPopup('<b>2. ZRO02M</b><br>+645.8 m');
+L.marker([50.93680638791203, 16.493884271272048], {icon: blueIcon}).addTo(map).bindPopup('<b>3. ZRO02A</b><br>+423.1 m');
+L.marker([50.94115067976171, 16.502664369964183], {icon: blueIcon}).addTo(map).bindPopup('<b>4. ZRO01BAPP</b><br>+1052.4 m');
+L.marker([50.94086645062012, 16.49571781044091], {icon: blueIcon}).addTo(map).bindPopup('<b>5. ZRO01M</b><br>+485.9 m');
+L.marker([50.94090661083602, 16.49313318865024], {icon: blueIcon}).addTo(map).bindPopup('<b>6. POP-ZRO4</b><br>+263.3 m');
+L.marker([50.94113997157207, 16.4936992681128], {icon: blueIcon}).addTo(map).bindPopup('<b>7. ZRO01N</b><br>+251.5 m');
+L.marker([50.94228645103341, 16.494720725784674], {icon: blueIcon}).addTo(map).bindPopup('<b>8. POP-ZRO3</b><br>+207.8 m');
+
+</script>
+</body>
+</html>

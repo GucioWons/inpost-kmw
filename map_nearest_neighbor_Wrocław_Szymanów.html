@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Route: NEAREST_NEIGHBOR — Wrocław</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { margin: 0; }
+    #map { height: 100vh; }
+    #info { position: absolute; top: 10px; right: 10px; z-index: 1000;
+            background: white; padding: 10px 14px; border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3); font-family: sans-serif; }
+    #info h3 { margin: 0 0 6px; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info">
+  <h3>NEAREST_NEIGHBOR</h3>
+  <p>Start: <b>SZYMANÓW PÓŁNOCNA</b></p>
+  <p>Stops: <b>23</b></p>
+  <p>Total distance: <b>40240.4 m</b></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map').setView([51.19630913678439, 17.030218802194465], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var greenIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+  var blueIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+
+  var routeLine = L.geoJSON({
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [[17.030861,51.19628],[17.032257,51.196391],[17.030889,51.187449],[17.023517,51.178648],[17.022503,51.17433],[17.023906,51.169844],[17.027842,51.16503],[17.028308,51.153434],[17.0321,51.14046],[17.028416,51.134946],[17.027732,51.127011],[17.034096,51.114177],[17.036098,51.114552],[17.040529,51.112724],[17.040691,51.11067],[17.039031,51.110712],[17.038369,51.106838],[17.035401,51.100916],[17.036588,51.101951],[17.035873,51.100744],[17.031385,51.100852],[17.031004,51.100156],[17.029816,51.098438],[17.032924,51.097761],[17.035237,51.100112],[17.02938,51.101383],[17.031056,51.104754],[17.032817,51.105224],[17.033493,51.107097],[17.040275,51.10866],[17.041518,51.108586],[17.040483,51.108245],[17.039375,51.108327],[17.040678,51.109056],[17.043251,51.108664],[17.040973,51.103744],[17.038455,51.102579],[17.039986,51.102652],[17.038842,51.100803],[17.038844,51.100808],[17.038439,51.099792],[17.02938,51.101383],[17.030188,51.102741],[17.035388,51.102039],[17.041809,51.100812],[17.04267,51.103163],[17.036279,51.104192],[17.031715,51.103438],[17.033153,51.104056],[17.030587,51.104089],[17.028356,51.100499],[17.024255,51.101327],[17.026447,51.102029],[17.026373,51.100862],[17.024255,51.101327],[17.025671,51.102364],[17.022151,51.104723],[17.016635,51.103208],[17.014255,51.105398],[17.01679,51.106053],[17.017566,51.106339],[17.019218,51.106649],[17.011823,51.104926],[17.012547,51.103613],[17.011226,51.103319],[17.0106,51.104454],[17.007746,51.104546],[17.006901,51.105004],[17.008027,51.104141],[17.020549,51.107534],[17.017551,51.110434],[17.018465,51.11234],[17.025011,51.11067],[17.024261,51.112045],[17.025579,51.112865],[17.027597,51.112484],[17.026392,51.110392],[17.027521,51.108403],[17.032979,51.10711],[17.033706,51.108059],[17.034836,51.107288],[17.029384,51.108091],[17.029038,51.109946],[17.030356,51.112955],[17.035143,51.114502],[17.039479,51.113106],[17.038075,51.112462],[17.032976,51.11333],[17.034096,51.114177],[17.03367,51.116716],[17.032008,51.117642],[17.027719,51.127146],[17.028637,51.134738],[17.032513,51.140382],[17.02859,51.153456],[17.028259,51.165713],[17.024029,51.169639],[17.022503,51.174177],[17.023517,51.178648],[17.030889,51.187449],[17.032257,51.196391],[17.030861,51.19628]]
+    }
+  }, { style: { color: '#e63946', weight: 4, opacity: 0.8 } }).addTo(map);
+  map.fitBounds(routeLine.getBounds());
+
+  L.marker([51.19630913678439, 17.030218802194465], {icon: greenIcon}).addTo(map).bindPopup('<b>START / META</b><br>SZYMANÓW PÓŁNOCNA');
+L.marker([51.112470732764194, 17.040418386588417], {icon: blueIcon}).addTo(map).bindPopup('<b>1. WRO01HO</b><br>+10319.1 m');
+L.marker([51.106869049991595, 17.038131782616823], {icon: blueIcon}).addTo(map).bindPopup('<b>2. WRO105M</b><br>+812.7 m');
+L.marker([51.100941100491184, 17.035239303907606], {icon: blueIcon}).addTo(map).bindPopup('<b>3. POP-WRO272</b><br>+758.1 m');
+L.marker([51.10013213086964, 17.03111656803804], {icon: blueIcon}).addTo(map).bindPopup('<b>4. WRO153M</b><br>+442 m');
+L.marker([51.100188226434554, 17.03527793725251], {icon: blueIcon}).addTo(map).bindPopup('<b>5. POP-WRO219</b><br>+857.3 m');
+L.marker([51.105295875369485, 17.032513924223483], {icon: blueIcon}).addTo(map).bindPopup('<b>6. WRO88M</b><br>+979.2 m');
+L.marker([51.10864442280285, 17.04019429643629], {icon: blueIcon}).addTo(map).bindPopup('<b>7. WRO122M</b><br>+802.8 m');
+L.marker([51.10835076717566, 17.040429406315045], {icon: blueIcon}).addTo(map).bindPopup('<b>8. WRO06HO</b><br>+204.2 m');
+L.marker([51.10260118332193, 17.038318790720854], {icon: blueIcon}).addTo(map).bindPopup('<b>9. WRO169M</b><br>+1314.1 m');
+L.marker([51.10077077708601, 17.03899967665633], {icon: blueIcon}).addTo(map).bindPopup('<b>10. WRO238M</b><br>+505.8 m');
+L.marker([51.1007762529065, 17.039001018212947], {icon: blueIcon}).addTo(map).bindPopup('<b>11. WRO10HP</b><br>+0 m');
+L.marker([51.09963201652476, 17.038516727454496], {icon: blueIcon}).addTo(map).bindPopup('<b>12. WRO69M</b><br>+125.2 m');
+L.marker([51.102067673260834, 17.035209784370277], {icon: blueIcon}).addTo(map).bindPopup('<b>13. POP-WRO103</b><br>+1256.9 m');
+L.marker([51.10344271773059, 17.03167008976014], {icon: blueIcon}).addTo(map).bindPopup('<b>14. WRO05HO</b><br>+1695.5 m');
+L.marker([51.10185617604387, 17.0263210019023], {icon: blueIcon}).addTo(map).bindPopup('<b>15. WRO24H</b><br>+1352.4 m');
+L.marker([51.10619592659191, 17.016661216613038], {icon: blueIcon}).addTo(map).bindPopup('<b>16. POP-WRO147</b><br>+1392.7 m');
+L.marker([51.10621430260036, 17.017682175375235], {icon: blueIcon}).addTo(map).bindPopup('<b>17. WRO210M</b><br>+63 m');
+L.marker([51.10676681933939, 17.019106457376477], {icon: blueIcon}).addTo(map).bindPopup('<b>18. POP-WRO223</b><br>+225.6 m');
+L.marker([51.10448444905791, 17.010737477019475], {icon: blueIcon}).addTo(map).bindPopup('<b>19. WRO37BAPP</b><br>+783.2 m');
+L.marker([51.10451795401458, 17.00775940331345], {icon: blueIcon}).addTo(map).bindPopup('<b>20. WRO25HP</b><br>+262.5 m');
+L.marker([51.1120807691697, 17.024202530546308], {icon: blueIcon}).addTo(map).bindPopup('<b>21. WRO02H</b><br>+2412.7 m');
+L.marker([51.110018547560905, 17.028628572061397], {icon: blueIcon}).addTo(map).bindPopup('<b>22. POP-WRO261</b><br>+2133.8 m');
+L.marker([51.11328726962954, 17.032964871601017], {icon: blueIcon}).addTo(map).bindPopup('<b>23. WRO26H</b><br>+1598.4 m');
+
+</script>
+</body>
+</html>

@@ -9,11 +9,13 @@ import com.guciowons.model.ParcelLocker;
 import com.guciowons.model.Route;
 import com.guciowons.model.StartingPoint;
 import com.guciowons.presentation.ConsoleMenu;
+import com.guciowons.presentation.MapGenerator;
 
 import java.util.List;
 
 public class Main {
     private static final ConsoleMenu menu = new ConsoleMenu();
+    private static final MapGenerator mapGenerator = new MapGenerator();
 
     public static void main(String[] args) {
         AddressCsvReader addressCsvReader = new AddressCsvReader();
@@ -37,35 +39,33 @@ public class Main {
         RouteService routeService = new RouteService(distanceDao);
 
         if (lockers.size() <= 12) {
-            executeWithTimer(() -> {
-                System.out.println(AlgorithmType.BRUTEFORCE.name());
-                Route route = routeService.calculateRoute(startingPoint, lockers, AlgorithmType.BRUTEFORCE);
-                menu.printRoute(route);
-            });
+            Route bruteforce = executeWithTimer(AlgorithmType.BRUTEFORCE.name(),
+                    () -> routeService.calculateRoute(startingPoint, lockers, AlgorithmType.BRUTEFORCE));
+            menu.printRoute(bruteforce);
+            mapGenerator.generateMap(bruteforce, AlgorithmType.BRUTEFORCE.name());
         }
 
-        executeWithTimer(() -> {
-            System.out.println(AlgorithmType.NEAREST_NEIGHBOR.name());
-            Route route = routeService.calculateRoute(startingPoint, lockers, AlgorithmType.NEAREST_NEIGHBOR);
-            menu.printRoute(route);
-        });
+        Route nearest = executeWithTimer(AlgorithmType.NEAREST_NEIGHBOR.name(),
+                () -> routeService.calculateRoute(startingPoint, lockers, AlgorithmType.NEAREST_NEIGHBOR));
+        menu.printRoute(nearest);
+        mapGenerator.generateMap(nearest, AlgorithmType.NEAREST_NEIGHBOR.name());
 
-        executeWithTimer(() -> {
-            System.out.println(AlgorithmType.GENETIC.name());
-            Route route = routeService.calculateRoute(startingPoint, lockers, AlgorithmType.GENETIC);
-            menu.printRoute(route);
-        });
+        Route genetic = executeWithTimer(AlgorithmType.GENETIC.name(),
+                () -> routeService.calculateRoute(startingPoint, lockers, AlgorithmType.GENETIC));
+        menu.printRoute(genetic);
+        mapGenerator.generateMap(genetic, AlgorithmType.GENETIC.name());
     }
 
-    public static void executeWithTimer(Runnable runnable) {
+    public static Route executeWithTimer(String name, java.util.function.Supplier<Route> supplier) {
+        System.out.println(name);
         long start = System.nanoTime();
 
-        runnable.run();
+        Route route = supplier.get();
 
         long end = System.nanoTime();
-        long durationNs = end - start;
-        double durationMs = durationNs / 1_000_000.0;
-
+        double durationMs = (end - start) / 1_000_000.0;
         System.out.println("Execution time: " + durationMs + " ms");
+
+        return route;
     }
 }

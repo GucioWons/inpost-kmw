@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Route: BRUTEFORCE — Choroszcz</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <style>
+    body { margin: 0; }
+    #map { height: 100vh; }
+    #info { position: absolute; top: 10px; right: 10px; z-index: 1000;
+            background: white; padding: 10px 14px; border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.3); font-family: sans-serif; }
+    #info h3 { margin: 0 0 6px; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="info">
+  <h3>BRUTEFORCE</h3>
+  <p>Start: <b>CHOROSZCZ</b></p>
+  <p>Stops: <b>8</b></p>
+  <p>Total distance: <b>11152.2 m</b></p>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var map = L.map('map').setView([53.16498311159552, 22.994395934303405], 13);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  var greenIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+  var blueIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41], iconAnchor: [12, 41], popupAnchor: [1, -34], shadowSize: [41, 41]
+  });
+
+  var routeLine = L.geoJSON({
+    "type": "Feature",
+    "geometry": {
+      "type": "LineString",
+      "coordinates": [[22.994266,53.164985],[22.994358,53.165738],[22.996155,53.165713],[22.99618,53.166],[23.003773,53.165992],[23.003061,53.162273],[22.999529,53.160267],[22.996969,53.160213],[22.995419,53.158006],[22.988997,53.154409],[22.993346,53.151263],[22.992408,53.150817],[22.991631,53.151395],[22.99225,53.150922],[22.989098,53.149304],[22.990773,53.147893],[22.994425,53.149048],[22.99573,53.148066],[22.995094,53.147764],[22.995978,53.147112],[22.993342,53.145829],[22.990708,53.144471],[22.988904,53.142521],[22.988139,53.142903],[22.987457,53.142551],[22.98811,53.141821],[22.985366,53.139537],[22.984504,53.139355],[22.985271,53.134433],[22.986616,53.13253],[22.986129,53.132288],[22.984983,53.135268],[22.984504,53.139355],[22.985235,53.139471],[22.986309,53.140403],[22.985146,53.1413],[22.984369,53.143921],[22.983294,53.145061],[22.985713,53.146826],[22.98644,53.149129],[22.987155,53.148835],[22.987793,53.148711],[22.987195,53.148612],[22.98644,53.149129],[22.985994,53.152738],[22.995922,53.158325],[22.996969,53.160213],[22.997898,53.160398],[22.999397,53.15998],[23.003211,53.162464],[23.003773,53.165992],[22.99618,53.166],[22.996155,53.165713],[22.994358,53.165738],[22.994266,53.164985]]
+    }
+  }, { style: { color: '#e63946', weight: 4, opacity: 0.8 } }).addTo(map);
+  map.fitBounds(routeLine.getBounds());
+
+  L.marker([53.16498311159552, 22.994395934303405], {icon: greenIcon}).addTo(map).bindPopup('<b>START / META</b><br>CHOROSZCZ');
+L.marker([53.15100997211745, 22.992427810597825], {icon: blueIcon}).addTo(map).bindPopup('<b>1. CRS02HP</b><br>+3087.7 m');
+L.marker([53.14788690675414, 22.990185239433067], {icon: blueIcon}).addTo(map).bindPopup('<b>2. CRS03HP</b><br>+498.8 m');
+L.marker([53.14597756735103, 22.993134781762077], {icon: blueIcon}).addTo(map).bindPopup('<b>3. CRS03M</b><br>+602.7 m');
+L.marker([53.13959156447878, 22.985469368267946], {icon: blueIcon}).addTo(map).bindPopup('<b>4. CRS01HP</b><br>+1043.9 m');
+L.marker([53.1344814354678, 22.985555639432107], {icon: blueIcon}).addTo(map).bindPopup('<b>5. CRS01BAPP</b><br>+629.1 m');
+L.marker([53.1394950261716, 22.985276249230512], {icon: blueIcon}).addTo(map).bindPopup('<b>6. CRS02M</b><br>+616.5 m');
+L.marker([53.148868175460976, 22.987116593639715], {icon: blueIcon}).addTo(map).bindPopup('<b>7. CRS04M</b><br>+1310.2 m');
+L.marker([53.14866119952383, 22.987310568268505], {icon: blueIcon}).addTo(map).bindPopup('<b>8. CRS01M</b><br>+34 m');
+
+</script>
+</body>
+</html>

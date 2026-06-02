@@ -15,4 +15,9 @@ public interface OsrmClient {
             @Param("lat2") BigDecimal lat2,
             @Param("lon2") BigDecimal lon2
     );
+
+    @RequestLine(
+            "GET /route/v1/driving/{coordinates}?overview=simplified&geometries=geojson"
+    )
+    OsrmGeometryResponse getRouteWithGeometry(@Param("coordinates") String coordinates);
 }
